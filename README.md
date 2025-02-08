@@ -1,1 +1,2 @@
-# Testing-Practice
+# Battleship
+Simple implementation of battleship game
