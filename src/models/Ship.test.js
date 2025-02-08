@@ -1,7 +1,7 @@
 import { beforeEach } from "@jest/globals";
 import Ship from "./Ship";
 
-describe("Ship getter and setters", () => {
+describe("Ship properties", () => {
   let ship;
   beforeEach(() => {
     ship = new Ship("Carrier", 0);
