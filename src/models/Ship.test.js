@@ -7,8 +7,8 @@ describe("Ship properties", () => {
     ship = new Ship("Carrier", 0);
   });
 
-  test("Should get name", () => {
-    expect(ship.name).toBe("Carrier");
+  test("Should get id", () => {
+    expect(ship.id).toBe("Carrier");
   });
 
   test("Should get length", () => {
@@ -19,9 +19,9 @@ describe("Ship properties", () => {
     expect(ship.length).toBe(0);
   });
 
-  test("Should set name", () => {
-    ship.name = "Destroyer";
-    expect(ship.name).toBe("Destroyer");
+  test("Should set id", () => {
+    ship.id = "Destroyer";
+    expect(ship.id).toBe("Destroyer");
   });
 
   test("Should set length", () => {
