@@ -1,0 +1,86 @@
+Battleship Game Requirements
+
+===========================================
+1. Game Setup
+===========================================
+1.1 Player Configuration:
+- The game shall support exactly two players per session.
+- No single-player or more than two players allowed.
+
+1.2 Gameboards:
+- Each player shall have two fixed 10x10 square tile gameboards:
+  - Self Board: For placing their own ships.
+  - Enemy Board: For marking enemy tiles and guessing ship positions.
+- The Enemy Board shall hide all enemy ships.
+- The Self Board shall display all of the player's own ships.
+
+===========================================
+2. Ships
+===========================================
+2.1 Ship Types and Quantities:
+- The game shall have at most 5 types of ships:
+  1. Carrier: 5 tiles, 1 Quantity.
+  2. Battleship: 4 tiles, 1 Quantity.
+  3. Cruiser: 3 tiles, 2 Quantity.
+  4. Submarine: 3 tiles, 2 Quantity.
+  5. Destroyer: 2 tiles, 2 Quantity.
+- Total tiles occupied by ships must be less than 25.
+
+2.2 Ship Placement Rules:
+- Ships must be placed before the first round starts.
+- Ships cannot be placed after the first round starts.
+- Ships must only be placed on the Self Board (left board).
+- Ships cannot be placed diagonally.
+
+===========================================
+3. Gameplay
+===========================================
+3.1 Rounds and Turns:
+- The game advances by rounds, with only one active player per round.
+- The active player "guesses" the position of enemy ships by selecting a tile on the Enemy Board.
+
+3.2 Hit/Miss Mechanics:
+- A "hit" occurs if the selected tile is occupied by an enemy ship.
+- A "miss" occurs if the selected tile is empty.
+- The Enemy Board shall visually indicate whether a tile is a "hit" or "miss."
+- The Self Board shall also visually indicate when a ship is hit by the enemy.
+
+3.3 Turn Continuation:
+- The active player gains another turn if they hit an enemy ship.
+- The turn passes to the other player if the active player misses.
+
+3.4 Sinking Ships:
+- A ship is considered "sunk" if all tiles it occupies are hit.
+- The game shall visually indicate when a ship is sunk.
+
+===========================================
+4. Game End
+===========================================
+4.1 Winning Condition:
+- The game ends when one player sinks all of the opponent's ships.
+- The player who sinks all enemy ships wins the game.
+
+===========================================
+5. Visualizations
+===========================================
+5.1 Tile Visuals:
+- The Enemy Board shall visually differentiate between:
+  - Tiles that have been hit (occupied by a ship).
+  - Tiles that have been missed (empty).
+- The Self Board shall visually differentiate between:
+  - Tiles occupied by ships.
+  - Tiles that have been hit by the enemy.
+  - Tiles that are empty.
+
+5.2 Ship Status:
+- The game shall visually indicate when a ship is sunk.
+
+===========================================
+6. Additional Rules
+===========================================
+6.1 Tile Interaction:
+- Players can only interact with the Enemy Board during their turn to guess ship positions.
+- Players cannot modify their Self Board after the first round starts.
+
+6.2 Game Flow:
+- The game shall enforce turn-based gameplay, ensuring only one player is active at a time.
