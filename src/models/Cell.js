@@ -1,3 +1,6 @@
 export default class Cell {
-  constructor() {}
+  constructor() {
+    this.hit = false;
+    this.isShip = false;
+  }
 }
