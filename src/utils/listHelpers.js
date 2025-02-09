@@ -42,3 +42,16 @@ export function analyzeArray(arr = []) {
     length,
   };
 }
+
+export function contains(obj, searchValue) {
+  if (typeof obj !== "object" || typeof obj === null) {
+    return obj === searchValue;
+  }
+
+  Object.values(obj).forEach((object) => {
+    if (contains(object, searchValue)) {
+      return true;
+    }
+  });
+  return false;
+}
