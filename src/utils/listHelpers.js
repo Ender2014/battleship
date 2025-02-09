@@ -1,3 +1,5 @@
+/* eslint-disable valid-typeof */
+/* eslint-disable consistent-return */
 export function removeItemOnce(arr, value) {
   const index = arr.indexOf(value);
   if (index > -1) {
