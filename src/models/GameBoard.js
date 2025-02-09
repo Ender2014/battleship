@@ -22,6 +22,10 @@ export default class GameBoard {
     return this.board[x][y] !== null;
   }
 
+  #isHit(x, y) {
+    return this.board[x][y] === true;
+  }
+
   #getShipById(id) {
     const search = (node) => {
       if (Array.isArray(node)) {
@@ -52,11 +56,15 @@ export default class GameBoard {
   }
 
   receiveAttack(x, y) {
+    if (this.#isHit(x, y)) {
+      return false;
+    }
     if (!this.#isShip(x, y)) {
       this.board[x][y] = false;
       return false;
     }
     this.#getShipByCoor(x, y).hit(1);
+    this.board[x][y] = true;
     return true;
   }
 

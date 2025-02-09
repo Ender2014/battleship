@@ -64,15 +64,20 @@ describe("receiveHit() -> registering hits", () => {
 
   test("Should be able to handle multiple same-ship hits", () => {
     for (let i = 0; i <= 2; i += 1) {
-      gameBoard.receiveAttack(0, 9);
+      gameBoard.receiveAttack(0 + i, 9);
     }
 
     expect(ship2.hits).toBe(3);
   });
 
+  test("Should not hit a hitted tile", () => {
+    gameBoard.receiveAttack(0, 9);
+    expect(gameBoard.receiveAttack(0, 9)).toBe(false);
+  });
+
   test("Should be able to sink ships", () => {
     for (let i = 0; i < ship2.length; i += 1) {
-      gameBoard.receiveAttack(0, 9);
+      gameBoard.receiveAttack(0 + i, 9);
     }
     expect(ship2.isSunk()).toBe(true);
   });
