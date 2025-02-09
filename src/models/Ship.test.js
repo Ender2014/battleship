@@ -4,7 +4,7 @@ import Ship from "./Ship";
 describe("Ship methods", () => {
   let ship;
   beforeEach(() => {
-    ship = new Ship("Carrier", 5);
+    ship = new Ship("Carrier", 3, true, [0, 0]);
   });
 
   test("hit(num) increases hits by input", () => {
@@ -15,12 +15,21 @@ describe("Ship methods", () => {
     expect(ship.hits).toBe(3);
   });
 
+  test("setPositions() sets the correct coordinates", () => {
+    ship.setPositions(0, 0);
+    expect(ship.positions).toEqual([
+      [0, 0],
+      [0, 1],
+      [0, 2],
+    ]);
+  });
+
   test("isSunk() returns", () => {
     expect(ship.isSunk()).toBe(false);
   });
 
   test("isSunk() WON'T sink ship when hits < length", () => {
-    ship.hit(3);
+    ship.hit(2);
     expect(ship.isSunk()).toBe(false);
   });
 
