@@ -1,9 +1,10 @@
 export default class Ship {
   #hits = 0;
 
-  constructor(id, length) {
+  constructor(id, length, isHorizontal) {
     this.id = id;
     this.length = length;
+    this.isHorizontal = isHorizontal;
   }
 
   get hits() {
