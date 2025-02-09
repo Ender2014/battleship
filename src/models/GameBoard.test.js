@@ -5,11 +5,13 @@ import Ship from "./Ship";
 let gameBoard;
 let ship1;
 let ship2;
+let ship3;
 
 beforeEach(() => {
   gameBoard = new GameBoard(10);
   ship1 = new Ship("Destroyer", 3, true, [0, 0]);
   ship2 = new Ship("Carrier", 3, false, [0, 9]);
+  ship3 = new Ship("Boat", 1, true, [1, 1]);
 });
 
 describe("place() -> placing ships", () => {
@@ -85,7 +87,26 @@ describe("receiveHit() -> registering hits", () => {
   });
 });
 
-describe("getShipById() -> fetching nested ships by Id", () => {
+describe("isAllSunk() -> detecting end game condition (is all ships sunken)", () => {
+  beforeEach(() => {
+    gameBoard.placeShip(ship1); // [0,0]
+    gameBoard.placeShip(ship2); // [0,9]
+    gameBoard.placeShip(ship3); // [1,1]
+    ship1.hit(3);
+    ship2.hit(3);
+  });
+
+  test("Should detect when all ships are not sunk", () => {
+    expect(gameBoard.isAllSunk()).toBe(false);
+  });
+
+  test("Should detect when all ships are sunk", () => {
+    ship3.hit(1);
+    expect(gameBoard.isAllSunk()).toBe(true);
+  });
+});
+
+/* describe("getShipById() -> fetching nested ships by Id", () => {
   beforeEach(() => {
     gameBoard.placeShip(ship1); // [0,0]
     gameBoard.placeShip(ship2); // [0,9]
@@ -96,4 +117,4 @@ describe("getShipById() -> fetching nested ships by Id", () => {
   test("Should get ship2 === 'Carrier'", () => {
     expect(gameBoard.getShipById("Carrier")).toEqual(ship2);
   });
-});
+}); */

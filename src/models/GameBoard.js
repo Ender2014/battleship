@@ -22,25 +22,7 @@ export default class GameBoard {
     return this.board[x][y] !== null;
   }
 
-  placeShip(ship) {
-    ship.positions.forEach(([x, y]) => {
-      this.board[x][y] = ship.id;
-      this.#ships.set(ship.id, ship);
-    });
-  }
-
-  receiveAttack(x, y) {
-    if (!this.#isShip(x, y)) {
-      this.board[x][y] = false;
-      return false;
-    }
-    this.#ships.get(this.board[x][y]).hit(1);
-    return true;
-  }
-
-  // isAllSunk() {}
-
-  getShipById(id) {
+  #getShipById(id) {
     const search = (node) => {
       if (Array.isArray(node)) {
         let result = null;
@@ -56,5 +38,32 @@ export default class GameBoard {
     };
 
     return search(this.board);
+  }
+
+  #getShipByCoor(x, y) {
+    return this.#ships.get(this.board[x][y]);
+  }
+
+  placeShip(ship) {
+    ship.positions.forEach(([x, y]) => {
+      this.board[x][y] = ship.id;
+      this.#ships.set(ship.id, ship);
+    });
+  }
+
+  receiveAttack(x, y) {
+    if (!this.#isShip(x, y)) {
+      this.board[x][y] = false;
+      return false;
+    }
+    this.#getShipByCoor(x, y).hit(1);
+    return true;
+  }
+
+  isAllSunk() {
+    return Array.from(this.#ships.values()).reduce(
+      (acc, ship) => acc && ship.isSunk(),
+      true
+    );
   }
 }
