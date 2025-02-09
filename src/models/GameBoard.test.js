@@ -91,3 +91,29 @@ describe("receiveHit() -> registering hits", () => {
     expect(gameBoard.board[2][3]).toBe(false);
   });
 });
+
+describe("getShipById() -> fetching nested ships by Id", () => {
+  let gameBoard;
+  let ship1;
+  let ship2;
+
+  beforeEach(() => {
+    ship1 = new Ship("Destroyer", 3, true);
+    ship2 = new Ship("Carrier", 4, true);
+    gameBoard = new GameBoard();
+    gameBoard.board = [
+      [null, null, null, null],
+      [[[ship1, ship1]], null, null, null],
+      [null, null, null, null],
+      [ship2, ship2, ship2, ship2],
+    ];
+  });
+
+  test("Should get correct ship", () => {
+    expect(gameBoard.getShipById("Carrier")).toEqual(ship2);
+  });
+
+  test("Should get nested ship", () => {
+    expect(gameBoard.getShipById("Destroyer")).toEqual(ship1);
+  });
+});
