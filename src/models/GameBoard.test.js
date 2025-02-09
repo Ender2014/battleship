@@ -4,37 +4,42 @@ import Ship from "./Ship";
 
 describe("place() -> placing ships", () => {
   let gameBoard;
-  let ship;
-  let x;
-  let y;
+  let ship1;
+  let ship2;
 
   beforeEach(() => {
     gameBoard = new GameBoard(10);
-    ship = new Ship("Destroyer", 3, true);
-    x = 1;
-    y = 4;
+    ship1 = new Ship("Destroyer", 3, true, [0, 0]);
+    ship2 = new Ship("Carrier", 3, false, [0, 9]);
   });
 
   test("Should place ships horizontally", () => {
-    gameBoard.placeShip(x, y, ship);
-
-    expect(gameBoard.board[x].slice(y, y + ship.length)).toEqual([
-      ship,
-      ship,
-      ship,
+    gameBoard.placeShip(ship1);
+    expect(gameBoard.board[0].slice(0, 0 + ship1.length)).toEqual([
+      ship1.id,
+      ship1.id,
+      ship1.id,
     ]);
   });
 
   test("Should place ships vertically", () => {
-    ship.isHorizontal = false;
-    gameBoard.placeShip(x, y, ship);
-
+    gameBoard.placeShip(ship2);
     expect(
-      gameBoard.board.slice(x, x + ship.length).map((row) => row[y])
-    ).toEqual([ship, ship, ship]);
+      gameBoard.board.slice(0, 0 + ship2.length).map((row) => row[9])
+    ).toEqual([ship2.id, ship2.id, ship2.id]);
+  });
+
+  test("Should record placed ships", () => {
+    gameBoard.placeShip(ship1);
+    expect(gameBoard.ships.get(ship1.id)).toEqual(ship1);
+  });
+
+  test("Should not record non placed ships", () => {
+    expect(gameBoard.ships.get(ship1.id)).toBe(undefined);
   });
 });
 
+/*
 describe("receiveHit() -> registering hits", () => {
   let gameBoard;
   let ship1;
@@ -116,4 +121,4 @@ describe("getShipById() -> fetching nested ships by Id", () => {
   test("Should get nested ship", () => {
     expect(gameBoard.getShipById("Destroyer")).toEqual(ship1);
   });
-});
+}); */

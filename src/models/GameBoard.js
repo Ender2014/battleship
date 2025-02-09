@@ -1,6 +1,14 @@
 export default class GameBoard {
+  #ships;
+
   constructor(size = 0) {
-    this.board = this.#createBoard(size);
+    this.size = size;
+    this.board = this.#createBoard(this.size);
+    this.#ships = new Map();
+  }
+
+  get ships() {
+    return this.#ships;
   }
 
   #createBoard(size) {
@@ -10,12 +18,10 @@ export default class GameBoard {
     return this.board;
   }
 
-  placeShip(x, y, ship) {
-    const coordinates = Array.from({ length: ship.length }, (_, i) =>
-      ship.isHorizontal ? [x, y + i] : [x + i, y]
-    );
-    coordinates.forEach(([nX, nY]) => {
-      this.board[nX][nY] = ship;
+  placeShip(ship) {
+    ship.positions.forEach(([x, y]) => {
+      this.board[x][y] = ship.id;
+      this.#ships.set(ship.id, ship);
     });
   }
 
@@ -32,8 +38,8 @@ export default class GameBoard {
         });
         return result;
       }
-      if (node && typeof node === "object" && node.id === id) {
-        return node;
+      if (node && node === id) {
+        return this.#ships.get(node);
       }
       return null;
     };
